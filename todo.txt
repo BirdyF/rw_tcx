@@ -1,0 +1,2 @@
+    Add tail in writeTCX
+    replace constants by variable in header of TCX in writeTCX

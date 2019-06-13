@@ -64,6 +64,9 @@ class TrackPoint {
 }
 
 class Tag {
+
+  Tag({this.content, this.index});
+
   String content;
   int index;  // Position of the last character of content in the string 
               // used to read a TCX file
