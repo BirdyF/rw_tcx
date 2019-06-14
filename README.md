@@ -4,7 +4,7 @@
 name: rw_tcx
 description: A simple package to read and write TCX file using Dart
 
-version: 0.0.1+2
+version: 0.0.1+3
 
 
 
