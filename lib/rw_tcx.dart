@@ -26,7 +26,6 @@ TCXModel readTCX(String contents) {
   Tag result = searchElement('Id', contents);
   print('result ${result.content}');
 
-  /// Check if result string is not empty
 
   Tag activity = searchAttribute('Activity', contents);
   print('Activity ${activity.content}');
@@ -58,8 +57,11 @@ TCXModel readTCX(String contents) {
   bool noMoreTrackPoints = false;
   int idx = 0;
 
+  
+
   do {
     TrackPoint trackPoint = extractTrackpoint(contents, idx);
+
     // Move to the next
     idx = trackPoint.index;
     print(
@@ -105,20 +107,29 @@ Future<void> writeTCX(TCXModel tcxInfos, String filename) async {
     xmlns="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns4="http://www.garmin.com/xmlschemas/ProfileExtension/v1">""";
 
+
+
+  String tail = """
+  <Creator>
+  <Name>rw_tcx</Name>
+  </Creator>
+  </Activity>
+  </Activities>
+  </TrainingCenterDatabase>
+  """;
+
   sink.write('$prolog\n');
 
   contents = prolog;
-
-  // Test createTimestamp
-  //---------------------
-  var date = DateTime(2019, 6, 11, 16, 50);
-  var toto = createTimestamp(date);
 
   String activitiesContent = '';
 
   // Add Activity
   //-------------
   String activityContent = '';
+
+  // TODO to replace with real data
+  var date = DateTime(2019, 6, 11, 16, 50);
 
   // Add ID
   activityContent =
@@ -163,8 +174,8 @@ Future<void> writeTCX(TCXModel tcxInfos, String filename) async {
 
   activitiesContent = addElement('Activities', activityContent);
 
-  contents = prolog + activitiesContent;
-  // Tail is still missing
+  contents = prolog + activitiesContent + tail;
+
 
   // sink = generatedTCXFile.openWrite(mode: FileMode.append);
   sink.write(contents);

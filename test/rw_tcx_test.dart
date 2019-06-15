@@ -15,8 +15,11 @@ void main() {
     String contents = "<TotalTimeSeconds>16524.0</TotalTimeSeconds>";
     Tag expectedTag = Tag(content: '16524.0', index: 25);
     Tag resultTag = searchElement('TotalTimeSeconds', contents);
-    expect('AAA', equals('AAA'));
     expect(resultTag.content, equals(expectedTag.content));
+
+    Tag wrongResultTag =searchElement('wrong', contents);
+    Tag emptyTag =Tag(content: '', index:0);
+    expect(wrongResultTag.content, equals(emptyTag.content));
     
 
     });
@@ -61,6 +64,32 @@ void main() {
    
     expect(resultTimestamp, equals('2019-06-11 14:50:00.000Z'));
 
+
+   
+
     });
+
+    test('addExtension tests', ()  {
+
+      String resultExtension = '';
+      String extensionContent = """<Extensions>\n   <ns3:TPX>\n     <ns3:Speed>1.996999979019165</ns3:Speed>\n   </ns3:TPX>\n</Extensions>\n""";
+      resultExtension = addExtension('Speed', 1.996999979019165);
+      expect(resultExtension, equals(extensionContent));
+    });
+
+
+
+  test('addHeartRate tests', ()  {
+
+      String resultExtension = '';
+      String heartRateContent = """
+                 <HeartRateBpm>
+              <Value>61</Value>
+            </HeartRateBpm>\n""";
+
+      resultExtension = addHeartRate(61);
+      expect(resultExtension, equals(heartRateContent));
+    });
+
   });
 }

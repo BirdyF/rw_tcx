@@ -56,8 +56,8 @@ class TrackPoint {
   double distance; // in meters
 
   double cadence;   // Not handled yet
-  double power;     // not handled yet
-  double hearRate;  // Not handled yet
+  double power;    
+  int heartRate; 
 
   int index;    // position of the trackpoint in the string
                 // used when reading the TCX file

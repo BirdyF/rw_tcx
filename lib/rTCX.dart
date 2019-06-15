@@ -10,6 +10,8 @@ import 'models/TCXModel.dart';
 /// Search for the content of a 'double' tag
 ///
 /// What is between <tag> and </tag>
+/// 
+/// return index 0 and content '' if search is not successful
 ///
 /// if index is missing start to search at the beginning of the contents string
 Tag searchElement(String tag, String contents, {int index}) {
@@ -19,7 +21,7 @@ Tag searchElement(String tag, String contents, {int index}) {
 
   int _pos = contents.indexOf(_startTag, _index);
   if (_pos == -1) {
-    print('start tag not found');
+    print('start Element not found $_startTag');
     _returnTag.content = '';
   } else {
     // Search for end
@@ -29,7 +31,7 @@ Tag searchElement(String tag, String contents, {int index}) {
     int _endPos = contents.indexOf(_endTag, _startPos);
     if (_endPos == -1) {
       // Problem end tag not found
-      print('start tag not found');
+      print('End Element not found $_endTag');
       _returnTag.content = '';
     } else {
       // Get what is between the start tag and end tag
@@ -54,7 +56,7 @@ Tag searchAttribute(String tag, String contents, {int index}) {
 
   int _pos = contents.indexOf(_startTag, _index);
   if (_pos == -1) {
-    print('start tag not found');
+    print('start Attribute not found $_startTag');
     _returnTag.content = '';
   } else {
     // Search for end
@@ -64,7 +66,7 @@ Tag searchAttribute(String tag, String contents, {int index}) {
     int _endPos = contents.indexOf(_endTag, _startPos);
     if (_endPos == -1) {
       // Problem end tag not found
-      print('start tag not found');
+      print('end Attribute not found $_endTag');
       _returnTag.content = '';
     } else {
       // Get what is between the start tag and end tag
@@ -139,15 +141,23 @@ TrackPoint extractTrackpoint(String contents, int index) {
   Tag longitude = searchElement('LongitudeDegrees', position.content);
   Tag altitude = searchElement('AltitudeMeters', trackPointTag.content);
   Tag distance = searchElement('DistanceMeters', trackPointTag.content);
+  Tag heartRateWithValue = searchElement('HeartRateBpm', contents);
+  // now remove 'value' tag
+  Tag heartRate = searchElement('Value', heartRateWithValue.content);
+
 
   String speed = searchExtension('Speed', contents, index: index);
+  String watts = searchExtension('Watts', contents, index: index);
+
 
   returnTrackPoint.latitude = double.tryParse(latitude.content);
   returnTrackPoint.longitude = double.tryParse(longitude.content);
   returnTrackPoint.altitude = double.tryParse(altitude.content);
   returnTrackPoint.distance = double.tryParse(distance.content);
+  returnTrackPoint.heartRate = int.tryParse((heartRate.content));
   returnTrackPoint.timeStamp = timeStampTag.content;
   returnTrackPoint.speed = double.tryParse(speed);
+  returnTrackPoint.power = double.tryParse(watts);
   returnTrackPoint.index = trackPointTag.index;
 
   if (timeStampTag.content == '') {
