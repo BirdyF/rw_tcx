@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "498913474886",
+    "firebase_url": "https://leafy-stock-249015.firebaseio.com",
+    "project_id": "leafy-stock-249015",
+    "storage_bucket": "leafy-stock-249015.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:498913474886:android:96b4a1ea3c2ed0dd",
+        "android_client_info": {
+          "package_name": "com.example.example"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "498913474886-jt6g05m2rahte1tj257kj1q7bnuugqes.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.example",
+            "certificate_hash": "61df540547637300b86b46886613722298a5e2fd"
+          }
+        },
+        {
+          "client_id": "498913474886-jmaecjgc5sgohfokg0ca58ilc0ggmgeo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAh1xv-yClcW75q9vkCoKc1Qk3AGWlDIc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "498913474886-jmaecjgc5sgohfokg0ca58ilc0ggmgeo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

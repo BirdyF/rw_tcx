@@ -1,6 +1,6 @@
 name: rw_tcx
-description:  Dart library to either read a TCX file or write a TCX. TCX file description can be found 
-version: 0.0.1
+description:  Dart library to either read a TCX file or write a TCX.
+version: 0.1.0
 author: Patrick FINKELSTEIN <patrick@rosemarine.com>
 homepage: https://github.com/BirdyF/rw_tcx
 
@@ -12,7 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  path_provider: ^0.5.0+1   # To access to the sample TCX file
+  path_provider: ^1.2.0   # To access to the sample TCX file
 
 dev_dependencies:
   flutter_test:

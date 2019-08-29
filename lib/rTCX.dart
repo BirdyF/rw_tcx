@@ -1,6 +1,78 @@
 // rTCX.dart
 
 import 'models/TCXModel.dart';
+import 'logTool.dart';
+
+/// Generate the ride data structure
+/// from a string
+/// Not tested in detail because main goal
+/// is to use writeTCX
+///
+TCXModel readTCX(String contents) {
+  TCXModel rideData = TCXModel();
+  rideData.points = List<TrackPoint>();
+
+  // Search for the content of a tag
+  Tag result = searchElement('Id', contents);
+  displayInfo('result ${result.content}');
+
+  Tag activity = searchAttribute('Activity', contents);
+  displayInfo('Activity ${activity.content}');
+
+  Tag totalDistance = searchElement('DistanceMeters', contents);
+  displayInfo('Distance ${totalDistance.content}');
+
+  Tag calories = searchElement('Calories', contents);
+  displayInfo('Calories ${calories.content}');
+
+  String speed = searchExtension('Speed', contents, index: 0);
+  displayInfo('Speed $speed');
+
+  // Start to store data in rideData structure
+  rideData.totalDistance = double.tryParse(totalDistance.content);
+
+  // search for sport= in the result and remove it
+  List<String> _activity = activity.content.split('=');
+  String activityType = _activity[1]; // Remove additional " "
+  activityType = activityType.substring(1, activityType.length - 1);
+
+  rideData.activityType = activityType;
+
+  rideData.maxSpeed = double.tryParse(speed);
+  rideData.calories = int.tryParse(calories.content);
+
+  // Read now all the trackpoints
+  //------------------------------
+  bool noMoreTrackPoints = false;
+  int idx = 0;
+
+  do {
+    TrackPoint trackPoint = extractTrackpoint(contents, idx);
+
+    // Move to the next
+    idx = trackPoint.index;
+    // displayInfo(
+    // 'idx : ${trackPoint.index}  -- ${trackPoint.timeStamp} -- ${trackPoint.distance}');
+    if (trackPoint.index == null) {
+      // No more trackpoint available in the String
+      displayInfo('No more trackPoints!');
+      noMoreTrackPoints = true;
+    } else {
+      // Add a new point in rideData
+
+      // If position is missing skip this trackpoint
+      // in garmin connect sometimes position is missing in trackpoint
+      if ((trackPoint.latitude != null) &&
+          (trackPoint.longitude != null) &&
+          (trackPoint != null)) {
+        rideData.points.add(trackPoint);
+      } else {
+        displayInfo('skip this position ${trackPoint.timeStamp}');
+      }
+    }
+  } while (!noMoreTrackPoints);
+  return rideData;
+}
 
 /// Tools to read a TCX and store the data in
 /// a proper structure
@@ -10,7 +82,7 @@ import 'models/TCXModel.dart';
 /// Search for the content of a 'double' tag
 ///
 /// What is between <tag> and </tag>
-/// 
+///
 /// return index 0 and content '' if search is not successful
 ///
 /// if index is missing start to search at the beginning of the contents string
@@ -21,7 +93,7 @@ Tag searchElement(String tag, String contents, {int index}) {
 
   int _pos = contents.indexOf(_startTag, _index);
   if (_pos == -1) {
-    print('start Element not found $_startTag');
+    // displayInfo('start Element not found $_startTag');
     _returnTag.content = '';
   } else {
     // Search for end
@@ -31,7 +103,7 @@ Tag searchElement(String tag, String contents, {int index}) {
     int _endPos = contents.indexOf(_endTag, _startPos);
     if (_endPos == -1) {
       // Problem end tag not found
-      print('End Element not found $_endTag');
+      displayInfo('End Element not found $_endTag');
       _returnTag.content = '';
     } else {
       // Get what is between the start tag and end tag
@@ -56,7 +128,7 @@ Tag searchAttribute(String tag, String contents, {int index}) {
 
   int _pos = contents.indexOf(_startTag, _index);
   if (_pos == -1) {
-    print('start Attribute not found $_startTag');
+    displayInfo('start Attribute not found $_startTag');
     _returnTag.content = '';
   } else {
     // Search for end
@@ -66,7 +138,7 @@ Tag searchAttribute(String tag, String contents, {int index}) {
     int _endPos = contents.indexOf(_endTag, _startPos);
     if (_endPos == -1) {
       // Problem end tag not found
-      print('end Attribute not found $_endTag');
+      displayInfo('end Attribute not found $_endTag');
       _returnTag.content = '';
     } else {
       // Get what is between the start tag and end tag
@@ -130,8 +202,10 @@ TrackPoint extractTrackpoint(String contents, int index) {
   // Convert the timestamp into DateTime
   try {
     DateTime dateTime = DateTime.parse(timeStampTag.content);
+    returnTrackPoint.date = dateTime;
   } catch (e) {
-    print('Error in dateformat $e');
+    displayInfo('Error in dateformat $e -> ${timeStampTag.content}');
+    // This error will happen if it is the end of the trackpoints
     return TrackPoint();
   }
 
@@ -145,10 +219,8 @@ TrackPoint extractTrackpoint(String contents, int index) {
   // now remove 'value' tag
   Tag heartRate = searchElement('Value', heartRateWithValue.content);
 
-
   String speed = searchExtension('Speed', contents, index: index);
   String watts = searchExtension('Watts', contents, index: index);
-
 
   returnTrackPoint.latitude = double.tryParse(latitude.content);
   returnTrackPoint.longitude = double.tryParse(longitude.content);

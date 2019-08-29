@@ -25,8 +25,18 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
 
-  path_provider: ^0.5.0+1   # To access to the sample TCX file
+  path_provider: ^1.2.0   # To access to the sample TCX file
 
+
+  strava_flutter: ^1.0.11+30
+
+  # Needed for Google Service Account
+  googleapis: any
+  googleapis_auth: any
+
+  # Needed for Google sign in 
+  google_sign_in: ^4.0.6
+  firebase_auth: ^0.14.0+2
 
 
 dev_dependencies:
@@ -51,7 +61,7 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
-  # Ride in gpx format to test uploadActivity
+  # Ride in tcx format to test uploadActivity
   assets:
-    - assets/sample1.tcx
+    - assets/sample2.tcx
 

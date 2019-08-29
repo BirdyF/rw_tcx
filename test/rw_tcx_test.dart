@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:rw_tcx/rw_tcx.dart';
 import 'package:rw_tcx/rTCX.dart';
 import 'package:rw_tcx/wTCX.dart';
 import 'package:rw_tcx/models/TCXModel.dart';
@@ -62,7 +61,7 @@ void main() {
     var date = DateTime(2019, 6, 11, 16, 50);
     String resultTimestamp = createTimestamp(date);
    
-    expect(resultTimestamp, equals('2019-06-11 14:50:00.000Z'));
+    expect(resultTimestamp, equals('2019-06-11T14:50:00.000Z'));
 
 
    

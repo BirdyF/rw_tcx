@@ -2,40 +2,53 @@
 
 
 name: rw_tcx
+
 description: A simple package to read and write TCX file using Dart
 
-version: 0.0.1+4
 
 ## Getting Started
 
-Please note that this is for the moment a work in progress package
 
 It is a Dart only package, Flutter is not needed
 
-The test file sample1.tcx is coming from Garmin Connect export
-
-
+ 
 
 
 
 ## How to install
-Check on pub.dev/ypackages to see how to install this package
+Check on pub.dev/packages to see how to install this package
+https://pub.dev/packages/rw_tcx#-installing-tab-
 
 
 ## How to use it
 
-There is onmy 2 APIs
+There is only 2 APIs
 - readTCX
 - writeTCX
 
+## Example
 
-If you have any problem or need an API not yet implemented please post a new issue
+There is a complete example showing how to use readTCX and writeTCX
+For readTCX, the sample2.tcx stored in assets is coming from Garmin Connect export
+For writeTCX, the generated TCX file is sent to Google Drive in addition to be uploaded to Strava
+
+## To check your TCX file
+
+There is a nice online tool https://www.gpsies.com/convert.do to get a detailed explanation of what is wrong in your TCX file 
+
 
 
 ## Tested on:
 
+So far only on Android 8.0 for the moment
 
-## Thanks 
+## Contributors welcome!
+
+If you spot a problem/bug or if you consider that the code could be better please post a new issue.
+I have developed this package to be able to upload a TCX to Strava so rTCX.dart is very basic. 
+Feel free to contribute to add more features.
+
+
 
 
 
