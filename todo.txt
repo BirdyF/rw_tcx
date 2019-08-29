@@ -1,5 +1,6 @@
     
     
+    Remove restriction Google API Android key to do additional tests
     Used displayinfo instaed of print()
     
     write_TCX
