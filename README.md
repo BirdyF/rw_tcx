@@ -15,7 +15,6 @@ It is a Dart only package, Flutter is not needed
  
 
 
-
 ## How to install
 Check on pub.dev/packages to see how to install this package
 https://pub.dev/packages/rw_tcx#-installing-tab-
@@ -23,7 +22,7 @@ https://pub.dev/packages/rw_tcx#-installing-tab-
 
 ## How to use it
 
-There is only 2 APIs
+There are only 2 APIs
 - readTCX
 - writeTCX
 
@@ -32,6 +31,7 @@ There is only 2 APIs
 There is a complete example showing how to use readTCX and writeTCX
 For readTCX, the sample2.tcx stored in assets is coming from Garmin Connect export
 For writeTCX, the generated TCX file is sent to Google Drive in addition to be uploaded to Strava
+
 
 ## To check your TCX file
 
