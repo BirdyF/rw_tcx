@@ -7,6 +7,10 @@
 * Added google drive export to example
 
 
-## [0.1.1] - 29/08/2019
+## [0.1.0] - 29/08/2019
 
-* Working release
+* Initial working release
+
+## [0.1.0+2] - 29/08/2019
+
+* Longer description in pubspec.yaml

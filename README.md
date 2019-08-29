@@ -4,6 +4,7 @@
 name: rw_tcx
 
 description: A simple package to read and write TCX file using Dart
+With this package it is possible to extract track points for a TCX file or write a valid TCX file from an array of track points 
 
 
 ## Getting Started

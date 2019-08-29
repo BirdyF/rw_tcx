@@ -1,7 +1,11 @@
     
+    
+    Used displayinfo instaed of print()
+    
     write_TCX
     - Replace constants by variable in tail of TCX 
     - ? convert timestamp string into date time to store properly
+    - Replace constants in lap (TotalTime, distance meters, max speed...)
 
     
     - Handle Extensions tag can have speed AND watts at the same time (in the same extension)
