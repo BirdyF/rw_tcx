@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter/services.dart' show rootBundle;
 
+import 'package:rw_tcx/logTool.dart';
 import 'secret.dart'; // Where Strava app secret and clientId stored
 
 import 'package:rw_tcx/models/TCXModel.dart';
@@ -44,6 +45,8 @@ class GoogleHttpClient extends IOClient {
 
 main(List<String> args) async {
   print('Start of rw_tcx example');
+
+  isRW_TCXInDebug = true;
 
 
   // First init of Strava API stuff

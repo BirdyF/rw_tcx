@@ -1,6 +1,6 @@
 name: rw_tcx
 description:  Dart library to either read a TCX file or write a TCX. Tested doing Strava upload. Example exporting the generated TCX to Google drive
-version: 0.1.0+3
+version: 0.1.1+4
 author: Patrick FINKELSTEIN <patrick@rosemarine.com>
 homepage: https://github.com/BirdyF/rw_tcx
 
